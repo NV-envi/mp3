@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NV-mp3</title>
+    <style type="text/css" media="all">
+      #outer-container{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+      }
+      #btn-container {
+        display: flex;
+        gap: 10px;
+      }
+      #back:active,#forward:active{
+        background-color: #8a8a8a13;
+        color: black;
+        
+      }
+      #back, #forward{
+        border: none;
+        background-color: black;
+        color : white;
+        margin: 5px 5px;
+        padding: 10px 15px;
+        
+      }
+      
+     
+ 
+    </style>
+  </head>
+  <body>
+    <div id="outer-container">
+    <div id="container">
+      <audio id="audioPlayer" controls>
+        <source id="srcHTML" src="#" type="audio/mp3"/>
+        Your browser does not support the audio element.
+      </audio>
+      <p id="songnameHTML">songname</p>
+      <div id="btn-container">
+        <button id="back" onclick="backward();"><<</button>
+        <button id="forward" onclick="forward();">>></button>
+      </div>
+    </div>
+    </div>
+    <script type="text/javascript" charset="utf-8">
+      let songList = [
+        {
+          songname: "Out of Time",
+          src: "out.mp3"
+        },
+        {
+          songname: "One of the Girls",
+          src: "oneofthegirls.mp3"
+        },
+        {
+          songname: "Money",
+          src: "money.mp3"
+        },
+        {
+          songname: "What do you mean?",
+          src: "whatdoyoumean.mp3"
+        },
+        {
+          songname: "Where are you now?",
+          src: "whereareyounow.mp3"
+        }
+      ];
+      
+      const songnameEle = document.getElementById("songnameHTML");
+      const srcEle = document.getElementById("srcHTML");
+      const audioPlayer = document.getElementById("audioPlayer");
+      let i = -1;
+
+      function forward() {
+        if (i < songList.length - 1) {
+          i++;
+          srcEle.src = songList[i].src;
+          songnameEle.innerHTML = songList[i].songname;
+          audioPlayer.load();
+          audioPlayer.play(); 
+        } else {
+          alert("This is the last song.");
+        }
+      }
+
+      function backward() {
+        if (i > 0) {
+          i--;
+          srcEle.src = songList[i].src;
+          songnameEle.innerHTML = songList[i].songname;
+          audioPlayer.load();
+          audioPlayer.play();
+        } else {
+          alert("This is the first song.");
+        }
+      }
+    </script>
+    
+  </body>
+</html>
